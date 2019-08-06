@@ -22,13 +22,13 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'config'
     nugetConfigPath: 'NuGet.config'
+    externalFeedCredentials: eneimv_nuget
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration Release'
-    externalFeedCredentials: eneimv_nuget
 
 - task: DotNetCoreCLI@2
   inputs:
