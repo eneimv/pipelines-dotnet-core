@@ -50,7 +50,13 @@ steps:
 #    ArtifactName: 'drop'
 #    publishLocation: 'Container'
 
-- script: dotnet pack /p:PackageVersion=$(version)
+- task: DotNetCoreCLI@2
+  displayName: 'Pack Project'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'off'
+
 - task: NuGetCommand@2
   displayName: 'Push nuget package'
   inputs:
