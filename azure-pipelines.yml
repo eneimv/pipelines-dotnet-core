@@ -40,6 +40,7 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage'
 
+- task: PublishBuildArtifacts@1
 
 #- task: PublishBuildArtifacts@1
 #  inputs:
@@ -56,6 +57,7 @@ steps:
     publishFeedCredentials: 'eneimv_nuget'
     versioningScheme: byEnvVar
     versionEnvVar: version
+
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish'
