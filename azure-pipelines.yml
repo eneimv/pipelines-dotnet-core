@@ -18,6 +18,7 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restore'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
@@ -26,12 +27,14 @@ steps:
     externalFeedCredentials: eneimv_nuget
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration Release'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Tests'
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
@@ -46,6 +49,7 @@ steps:
 
 - script: dotnet pack /p:PackageVersion=$(version)
 - task: NuGetCommand@2
+  displayName: 'Push nuget package'
   inputs:
     command: push
     nuGetFeedType: external
@@ -54,6 +58,7 @@ steps:
     versionEnvVar: version
 
 - task: DotNetCoreCLI@2
+  displayName: 'Publish'
   inputs:
     command: publish
     publishWebProjects: True
